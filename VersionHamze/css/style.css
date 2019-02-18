@@ -1,0 +1,27 @@
+.tab{
+  width: 100%;
+  height: calc(100vh - 160px);
+
+}
+.tab td{
+  padding:10px;
+  border: 1px solid gray;
+  vertical-align: top;
+  width:10%;
+  height: 20%;
+}
+
+.tab--6weeks td {
+  height: 16.66px;
+}
+
+.weekDay {
+  font-weight: bold;
+  color: black;
+  font-size: 1.2em;
+}
+
+.overMonth .dayNumber{
+  opacity: 0.2;
+  font-size: 1.3em;
+}
