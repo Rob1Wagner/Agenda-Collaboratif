@@ -1,11 +1,13 @@
 <?php
   namespace App\date;
 
+
+
   class Events{
 
     private $bdd;
 
-    public function __construct($bdd)
+    public function __construct(\PDO $bdd)
     {
       $this->bdd = $bdd;
     }
@@ -32,7 +34,9 @@
         $date = explode(' ', $event['debut'])[0];
         if (!isset($days[$date])) {
           $days[$date] = [$event];
-        }else{
+        }
+        else
+        {
           $days[$date][]= $event;
         }
 
@@ -50,5 +54,50 @@
         }
         return $res;
     }
+    /* créer un evenement*/
+    public function create(Event $event) {
+      $sql = $this->bdd->prepare('INSERT INTO evenement (createur, nom, description, debut, fin, idGroupe)
+                          VALUES(?, ?, ?, ?, ?, ?)');
+      $result = $sql->execute([
+        $event->getCreator(),
+        $event->getName(),
+        $event->getDescription(),
+        $event->getStart()->format('Y-m-d H:i:s'),
+        $event->getEnd()->format('Y-m-d H:i:s'),
+        $event->getGroup(),
+      ]);
+      //var_dump($sql->errorInfo());
+      return $result;
+    }
+
+    /*public function create($creator, $name, $description, $debut, $fin, $group) {
+      $sql ='INSERT INTO evenement (`createur`,`nom`, `description`, `debut`, `fin`, `idGroupe`)
+                          VALUES ($creator, $name, $description, $debut, $fin, $group)';
+
+      $statements = $this->bdd->query($sql);
+      return $statements;
+    }*/
+
+    public function getUser ():array{
+
+      $sql = "SELECT * FROM user WHERE debut BETWEEN '{$start-> format('Y-m-d 00:00:00')}'
+              AND '{$end-> format('Y-m-d 23:59:59')}'";
+
+      $statements = $this->bdd->query($sql);
+      $resultats = $statements->fetchALL();
+
+      return $resultats;
+    }
+
+    public function selectAllUser(){
+      $sql ="SELECT * FROM user WHERE 1";
+
+      return mysqli_query($bdd, $sql);
+
+    }
+
+
   }
+
+
 ?>

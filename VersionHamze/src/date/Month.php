@@ -3,19 +3,18 @@
 
 namespace App\date;
 class Month{
-	public $days =['lundi', 'mardi', 'mercredi','jeudi', 'vendredi', 'samedi', 'dimanche'];
+	public $days =['Lundi', 'Mardi', 'Mercredi','Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 	private $months =['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
 						'Aout', 'September', 'Octobre', 'Novembre', 'Décembre'];
 	public $month;
 	public $year;
-	public $newmonth ;
-	public $newyear;
 
 
 
-	public function __construct($month = null, $year= null)
+
+	public function __construct(?int $month = null,?int $year= null)
 	{
-		if ($month === null){
+		if ($month === null || $month<1 || $month >12){
 			$month = intval(date('m'));
 		}
 		if ($year === null){

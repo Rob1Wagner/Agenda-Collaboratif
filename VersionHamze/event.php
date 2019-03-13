@@ -30,10 +30,12 @@ require 'views/header.php';
 <h1> <?= h($event['nom']); ?> </h1>
 
 <ul>
-  <li>Date: <?= (new DateTime($event['debut']))->format('d/m/Y'); ?></li>
-  <li>Heure de début: <?= (new DateTime($event['debut']))->format('H:i'); ?></li>
-  <li>Heure de fin: <?= (new DateTime($event['fin']))->format('H:i'); ?></li>
-  <li>Description:<br> <?= h($event['description']); ?> </li>
+  <li>Date de début   :     <?= (new DateTime($event['debut']))->format('d/m/Y'); ?></li>
+  <li>Heure de début  :     <?= (new DateTime($event['debut']))->format('H:i'); ?></li><br>
+  <li>Date de fin     :     <?= (new DateTime($event['fin']))->format('d/m/Y'); ?></li>
+  <li>Heure de fin    :     <?= (new DateTime($event['fin']))->format('H:i'); ?></li><br>
+  <li>Description     :<br> <?= h($event['description']); ?> </li>
+
 </ul>
 
 <?php

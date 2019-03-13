@@ -1,16 +1,23 @@
 <?php
-namespace date;
-class Event {
+namespace App\date;
+class Event{
 
     private $id;
 
-    private $nom;
+    private $creator;
 
-    private $description;
+    private $name;
 
-    private $debut;
+    private$description;
 
-    private $fin;
+    private $start;
+
+    private $end;
+
+    private $group;
+
+
+
 
 
     public function getId():int
@@ -18,9 +25,19 @@ class Event {
       return $this->id;
     }
 
-    public function getNom():string
+    public function getCreator()
     {
-      return $this->nom;
+      return $this->creator;
+    }
+
+    public function getGroup()
+    {
+      return $this->group;
+    }
+
+    public function getName():string
+    {
+      return $this->name;
     }
 
     public function getDescription():string
@@ -28,17 +45,48 @@ class Event {
       return $this->description;
     }
 
-    public function getDebut():\DateTime
+    public function getStart():\DateTime
     {
-      return new \DateTime($this->debut);
+      return new \DateTime($this->start);
     }
 
-    public function getFin():\DateTime
+    public function getEnd():\DateTime
     {
-      return new \DateTime($this->fin);
+      return new \DateTime($this->end);
     }
 
 
+
+
+    public function setCreator($creator)
+    {
+      $this->creator = $creator;
+    }
+
+    public function setName(string $name)
+    {
+     $this->name = $name;
+    }
+
+    public function setDescription($description)
+    {
+     $this->description = $description;
+    }
+
+    public function setStart(string $start)
+    {
+     $this->start = $start;
+    }
+
+    public function setEnd(string $end)
+    {
+     $this->end = $end;
+    }
+
+    public function setGroup($group)
+    {
+     $this->group = $group;
+    }
 
 }
 
