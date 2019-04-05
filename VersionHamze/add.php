@@ -10,20 +10,20 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
   $data =$_POST;
    $event = new App\date\Event();
 
-   $event->setCreator($data['creator']);
+   $event->setCreator($_SESSION['idUser']);
    $event->setName($data['name']);
    $event->setDescription($data['description']);
    $event->setStart(DateTime::createFromFormat ('Y-m-d H:i', $data['dd'] . ' ' . $data['start'])->format('Y-m-d H:i:s'));
    $event->setEnd(DateTime::createFromFormat   ('Y-m-d H:i', $data['df'] . ' ' . $data['end'])->format('Y-m-d H:i:s'));
-   $event->setGroup($data['group']);
-   dd($event);
+   $event->setGroup($_POST['idGroupe']);
+
   $events =new App\date\Events($bdd);
 
   $events->create($event);
 
 
   header('Location: /1/agenda?success=1');
-  exit();
+
 
 }
 /*  $errors = [] ;
@@ -51,32 +51,37 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
       <div class="col-sm-6">
         <div class="form-group">
           <lable for="type">Type</lable>
-          <input id="type" type="text" required class="form-control" name="type" placeholder="public ou private">
+        </br>
+
+          <select name="type" class="col-sm-12">
+            <option value="private">Private</option>
+            <option value="public">Public</option>
+
+           </select>
         </div>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-sm-6">
+   <div class="row">
+    <?php /*  <div class="col-sm-6">
         <div class="form-group">
-          <lable for="group">Id Groupe</lable>
-          <input id="group" type="text" class="form-control" name="group"  value="<?= isset($data['group']) ? h($data['group']) : '';?>">
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="form-group">
-          <lable for="creator">Createur</lable>
-          <?php /*<<select name="champCreateur">
+          <lable for="group">Groupe</lable>
+
+        </br>
+
+          <select name="idGroupe" class="col-sm-12">
             <?php
-              $res =selectAllUser();
-              while ($row =mysqli_fetch_assoc($res)){
-                echo '<option value="'.$row["id"]. '">'. $row["nom"].'</option>';
+              $id = $_SESSION['idUser'];
+              $sql="SELECT * FROM groupe WHERE createur = $id ";
+              $statements = $bdd->query($sql);
+              while($row= $statements->fetch()){
+                echo '<option value="'.$row['id'].'">'.$row['nom'].'</option>';
               }
             ?>
-          </select>*/ ?>
-          <input id="creator" type="text" class="form-control" name="creator"  value="<?= isset($data['creator']) ? h($data['creator']) : '';?>">
+           </select>
         </div>
-      </div>
+      </div>*/ ?>
+
     </div>
 
 
@@ -125,6 +130,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
     </div>
   </form>
 </div>
+
 
 
 <?php require 'views/footer.php';?>

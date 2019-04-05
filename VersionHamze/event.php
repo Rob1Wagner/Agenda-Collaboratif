@@ -38,6 +38,11 @@ require 'views/header.php';
 
 </ul>
 
+<form action="delete.php" method="post" class="form">
+  <input type="hidden" name="id" value="<?= $_GET['id']; ?>">
+  <input type="submit" value="supprimer l'evenement">
+</form>
 <?php
+
 require 'views/footer.php';
 ?>

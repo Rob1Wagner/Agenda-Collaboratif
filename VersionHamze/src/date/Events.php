@@ -14,12 +14,20 @@
 
     /* récupérer les evenements entre deux dats*/
     public function getEvents ($start, $end):array{
+      $id=$_SESSION['idUser'];
 
-      $sql = "SELECT * FROM evenement WHERE debut BETWEEN '{$start-> format('Y-m-d 00:00:00')}'
-              AND '{$end-> format('Y-m-d 23:59:59')}'";
 
+      $sql = "SELECT * FROM evenement  WHERE createur = $id AND (debut BETWEEN '{$start-> format('Y-m-d 00:00:00')}'
+              AND '{$end-> format('Y-m-d 23:59:59')}') ORDER BY debut DESC";
       $statements = $this->bdd->query($sql);
+
+      /*$id2 = $_SESSION['EG'];
+      $sql2 = "SELECT * FROM evenement WHERE id = $id2 ";
+      $statements = $statements && $this->bdd->query($sql2);*/
+
+
       $resultats = $statements->fetchALL();
+
 
       return $resultats;
     }
@@ -65,9 +73,18 @@
         $event->getStart()->format('Y-m-d H:i:s'),
         $event->getEnd()->format('Y-m-d H:i:s'),
         $event->getGroup(),
+
       ]);
-      //var_dump($sql->errorInfo());
+      /*var_dump($sql->errorInfo());*/
+
       return $result;
+    }
+
+    public function delete($id){
+      $sql ="DELETE FROM evenement WHERE id = $id";
+      $statements = $this->bdd->query($sql);
+
+
     }
 
     /*public function create($creator, $name, $description, $debut, $fin, $group) {
@@ -89,12 +106,6 @@
       return $resultats;
     }
 
-    public function selectAllUser(){
-      $sql ="SELECT * FROM user WHERE 1";
-
-      return mysqli_query($bdd, $sql);
-
-    }
 
 
   }

@@ -11,6 +11,7 @@
 
 
 
+
 			$events = new App\date\Events($bdd);
 
 			try
@@ -33,9 +34,8 @@
 			$end= (clone $start)->modify('+' . (6 + 7 * ($weeks - 1)) .'days');
 			/* stocker les evenments entre deux date dans une variable */
 			$events = $events->getEventsByDay($start,$end);
-
-
 		?>
+
 <div class="calendar">
 
 	<?php if(isset($_GET['success'])): ?>
@@ -45,6 +45,24 @@
 			</div>
 		</div>
 	<?php endif; ?>
+
+		<?php if(isset($_GET['successSup'])): ?>
+			<div class= "container">
+				<div class="alert alert-danger">
+					L'evenement a bien été supprimé
+				</div>
+			</div>
+		<?php endif; ?>
+
+</div>
+
+
+
+
+
+
+
+
 
 			<div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
 				<h1><?= $month->toString(); ?></h1>
@@ -79,7 +97,7 @@
 
 								<?php foreach($eventsForDay as $event): ?>
 									<div class="event">
-										<?= (new DateTime($event['debut']))->format('H:i') ?> -
+										<?= (new DateTime($event['debut']))->format('H:i') ?> - 
 										 		<a href="/1/event.php?id=<?= $event['id'];?>"><?= h($event['nom']);?></a>
 									</div>
 								<?php endforeach; ?>
@@ -92,6 +110,8 @@
 			</table>
 
 			<a href="add.php" class="calendar__button">+</a>
+			<div>
+
 </div>
 
 <?php
