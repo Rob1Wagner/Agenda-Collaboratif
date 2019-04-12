@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 05, 2019 at 02:01 PM
+-- Generation Time: Apr 12, 2019 at 06:55 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -65,14 +65,17 @@ CREATE TABLE IF NOT EXISTS `evenementgroupe` (
   PRIMARY KEY (`id`),
   KEY `idEvenement` (`idEvenement`),
   KEY `idGroupe` (`idGroupe`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `evenementgroupe`
 --
 
 INSERT INTO `evenementgroupe` (`id`, `idEvenement`, `idGroupe`) VALUES
-(2, 1, 30);
+(2, 1, 30),
+(3, 2, 31),
+(4, 3, 31),
+(5, 2, 30);
 
 -- --------------------------------------------------------
 
@@ -87,14 +90,16 @@ CREATE TABLE IF NOT EXISTS `groupe` (
   `createur` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `createur` (`createur`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `groupe`
 --
 
 INSERT INTO `groupe` (`id`, `nom`, `createur`) VALUES
-(30, 'groupeski', 14);
+(30, 'groupeski', 14),
+(31, 'fernandoc', 13),
+(32, 'ferds', 13);
 
 -- --------------------------------------------------------
 
@@ -111,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `invitationgroupe` (
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`),
   KEY `idGroupe` (`idGroupe`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -185,14 +190,18 @@ CREATE TABLE IF NOT EXISTS `usergroupe` (
   PRIMARY KEY (`id`),
   KEY `idGroupeId` (`idUser`),
   KEY `idGroupe` (`idGroupe`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `usergroupe`
 --
 
 INSERT INTO `usergroupe` (`id`, `idUser`, `idGroupe`, `responsable`) VALUES
-(54, 13, 30, 1);
+(54, 13, 30, 1),
+(56, 15, 31, 1),
+(60, 15, 32, 1),
+(61, 13, 31, 1),
+(62, 14, 31, 1);
 
 --
 -- Constraints for dumped tables

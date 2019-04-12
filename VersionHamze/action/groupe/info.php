@@ -48,12 +48,7 @@
       </div>
     <?php endif; ?>
   </div>
-</div>
 
-<?php
-
- ?>
-<div>
 
   <h3 class=" ml-2"> Mes Groupes </h3>
   <form action="RecMesGroupes.php" method="post">
@@ -64,18 +59,47 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Nom de Groupe</th>
+          <th class="table-dark" scope="col">Nom de Groupe</th>
+          <th class="table-dark" scope="col">Membres de groupe</th>
+          <th class="table-dark" scope="col">Evenements de groupe</th>v
+
+
         </tr>
       </thead>
       <?php
         $groupes = $_SESSION['mesGroupes'];
-       /*while ($groupes):*/
+        $membres = $_SESSION['mesMembres'];
+        $evenements = $_SESSION['mesEvenements'];
+
+
+
        for($i=0; $i<$_SESSION['nbMesGroupes']; $i++):
       ?>
         <tbody>
-          <tr>
+          <tr >
             <th scope="row"><?php echo $i+1; ?></th>
-            <td><?php echo $groupes[$i][0]; ?></td>
+            <td class="table-success"><?php echo $groupes[$i]['nom']; ?></td>
+            <td class="table-danger">
+              <?php
+
+                for($j=0; $j<sizeof($membres[$i]); $j++){
+                         echo " , ";
+                         echo $membres[$i][$j]['nom']; }
+              ?>
+            </td>
+            <td class="table-primary">
+              <?php
+
+                for($j=0; $j<sizeof($evenements[$i]); $j++){
+                         echo " , ";
+                         echo $evenements[$i][$j]['nom']; }
+              ?>
+            </td>
+            <td>
+              <form action="SortirGroupe.php" method="post">
+                <button type="submit" class="btn btn-secondary " data-toggle="button" aria-pressed="false" autocomplete="off">Quitter ce groupe</button>
+              </form>
+            </td>
           </tr>
         </tbody>
       <?php endfor; ?>

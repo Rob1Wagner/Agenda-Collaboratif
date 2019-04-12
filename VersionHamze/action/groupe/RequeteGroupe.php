@@ -71,7 +71,7 @@ function recInvitation($id){
 
 function supInvitation($id){
   $bdd=bdd();
-  $sql= "DELETE FROM invitationgroupe WHERE idGroupe= $id";
+  $sql= "DELETE FROM invitationgroupe WHERE idUser= $id";
   $statements = $bdd->query($sql);
   return $statements;
 }
@@ -81,6 +81,22 @@ function recGroupe($id){
   $sql= "SELECT DISTINCT idGroupe FROM usergroupe WHERE idUser = $id ";
   $statements = $bdd->query($sql);
   $resultats = $statements->fetchALL();
+  return $resultats;
+}
+
+function recMembreDansGroupe($id){
+  $bdd= bdd();
+  $sql= "SELECT DISTINCT idUser FROM usergroupe WHERE idGroupe = $id ";
+  $statements = $bdd->query($sql);
+  $resultats = $statements->fetchALL();
+  return $resultats;
+}
+
+function recNomMembre($id){
+  $bdd= bdd();
+  $sql= "SELECT nom FROM user WHERE id = $id ";
+  $statements = $bdd->query($sql);
+  $resultats = $statements->fetch();
   return $resultats;
 }
 
@@ -96,7 +112,23 @@ function inserEvenementGroupe($evenement,$groupe){
 
 function recEvenementDansGroupeEvenement($id){
   $bdd= bdd();
-  $sql= "SELECT DISTINCT idEvenement FROM evenementgroupe WHERE idGroupe = $id ";
+  $sql= "SELECT idEvenement FROM evenementgroupe WHERE idGroupe = $id ";
+  $statements = $bdd->query($sql);
+  $resultats = $statements->fetchALL();
+  return $resultats;
+}
+
+function recNomEvenement($id){
+  $bdd= bdd();
+  $sql= "SELECT nom FROM evenement WHERE id = $id ";
+  $statements = $bdd->query($sql);
+  $resultats = $statements->fetch();
+  return $resultats;
+}
+
+function recIdGroupe($nom){
+  $bdd= bdd();
+  $sql= "SELECT id FROM groupe WHERE nom = $nom ";
   $statements = $bdd->query($sql);
   $resultats = $statements->fetch();
   return $resultats;
