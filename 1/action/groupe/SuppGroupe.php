@@ -1,7 +1,8 @@
 <?php
   require 'RequeteGroupe.php';
-  $nomGroupe = $_POST["groupes"];
-  suppGroupe($nomGroupe);
+  $idGroupe = $_POST["groupes"];
+
+  suppGroupe($idGroupe);
 
 
   header('Location: ReqGroupe?successSuppGroupe=1');

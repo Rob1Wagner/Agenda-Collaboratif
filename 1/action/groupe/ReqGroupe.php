@@ -2,8 +2,10 @@
 
 require '../../views/header.php';
 require '../../src/date/bootstrap.php';
-$bdd=bdd();
 
+
+$bdd=bdd();
+/*<script type= "text/javascript" src="JsGroupe.js"></script>*/
  ?>
 
 <div class="calendar">
@@ -48,6 +50,22 @@ $bdd=bdd();
        </div>
      </div>
 
+     <div class="row">
+       <div class="form-group col-sm-6">
+         <label for="name">Admin</label>
+          </br>
+            <select name="choixAdmin" class="browser-default custom-select custom-select-lg mb-3">
+              <?php
+                $sql='SELECT id,prenom FROM user';
+                $statements = $bdd->query($sql);
+                while($row= $statements->fetch()){
+                  echo '<option value="'.$row['id'].'">'.$row['prenom'].'</option>';
+                }
+              ?>
+            </select>
+        </div>
+      </div>
+
        <div class="row">
         <div class="form-group">
           <input type="submit" name="action" value="Créer" class="btn btn-outline-danger"/>
@@ -67,13 +85,19 @@ $bdd=bdd();
            <label for="name">Nom</label>
          </br>
 
-           <select name="groupes" class="col-sm-6">
+           <select name="groupes"  class="browser-default custom-select custom-select-lg mb-3">
              <?php
               $id = $_SESSION["idUser"];
-              $sql="SELECT DISTINCT nom FROM groupe WHERE createur = $id ";
+              $sql="SELECT DISTINCT * FROM groupe WHERE createur = $id ";
               $statements = $bdd->query($sql);
               while($row= $statements->fetch()){
-                  echo '<option value="'.$row['0'].'">'.$row['0'].'</option>';
+                echo '<option value="'.$row['id'].'">'.$row['nom'].'</option>';
+              }
+              $sql="SELECT DISTINCT * FROM groupe WHERE admin = $id ";
+              $statements = $bdd->query($sql);
+              while($row= $statements->fetch()){
+                  echo '
+                  <option value="'.$row['id'].'">'.$row['nom'].'</option>';
               }
               ?>
             </select>
@@ -85,6 +109,40 @@ $bdd=bdd();
        <div class="row">
         <div class="form-group">
           <input type="submit" name="action" value="Supprimer" class="btn btn-outline-danger"/>
+        </div>
+      </div>
+   </form>
+ </div>
+
+ <div class="container">
+   <h1>Quitter un groupe</h1>
+
+   <form action="SortirGroupe.php" method="post" class="form">
+     <div class="row">
+       <div class="col-sm-6 ">
+         <div class="form-group">
+           <label for="name">Nom</label>
+         </br>
+
+           <select name="groupes"  class="browser-default custom-select custom-select-lg mb-3">
+             <?php
+              $groupes = $_SESSION['mesGroupes'];
+              var_dump($groupes);
+              $i=0;
+              for($i=0;$i<sizeof($groupes);$i++){
+                echo '<option value="'.$groupes[$i]['nom'].'">'.$groupes[$i]['nom'].'</option>';
+              }
+
+              ?>
+            </select>
+
+         </div>
+       </div>
+     </div>
+
+       <div class="row">
+        <div class="form-group">
+          <input type="submit" name="action" value="Quitter" class="btn btn-outline-danger"/>
         </div>
       </div>
    </form>
@@ -102,7 +160,7 @@ $bdd=bdd();
            <label for="name">User</label>
          </br>
 
-           <select name="choixUser" class="col-sm-6">
+           <select name="choixUser" class="browser-default custom-select custom-select-lg mb-3">
              <?php
 
               $sql='SELECT id,prenom FROM user';
@@ -123,7 +181,7 @@ $bdd=bdd();
          <label for="name">Groupe</label>
        </br>
 
-         <select name="choixGroupe" class="col-sm-6">
+         <select name="choixGroupe" class="browser-default custom-select custom-select-lg mb-3">
            <?php
 
             $sql="SELECT * FROM groupe WHERE createur = $id";
@@ -131,6 +189,12 @@ $bdd=bdd();
             while($row= $statements->fetch()){
                 echo '<option value="'.$row['id'].'">'.$row['nom'].'</option>';
 
+            }
+            $sql="SELECT DISTINCT * FROM groupe WHERE admin = $id ";
+            $statements = $bdd->query($sql);
+            while($row= $statements->fetch()){
+                echo '
+                <option value="'.$row['id'].'">'.$row['nom'].'</option>';
             }
             ?>
           </select>
@@ -144,7 +208,7 @@ $bdd=bdd();
          <label for="name">Importance</label>
        </br>
 
-         <select name="choixImportance" class="col-sm-6">
+         <select name="choixImportance" class="browser-default custom-select custom-select-lg mb-3">
            <option value="1">Important</option>
            <option value="0">Secondaire</option>
           </select>
@@ -174,19 +238,19 @@ $bdd=bdd();
            <label for="name">Evenement</label>
          </br>
 
-           <select name="choixEvenement" class="col-sm-6">
-             <?php
-
-              $sql='SELECT id,nom FROM evenement';
-              $statements = $bdd->query($sql);
-              while($row= $statements->fetch()){
-                  echo '<option value="'.$row['id'].'">'.$row['nom'].'</option>';
-              }
-              ?>
-            </select>
-           <!--<input id="name" type="text" required class="form-control" name="nameGroupeSupp">-->
-         </div>
+         <select name="choixEvenement" class="browser-default custom-select custom-select-lg mb-3">
+           <?php
+           $id =$_SESSION['idUser'];
+           $sql="SELECT id,nom FROM evenement WHERE createur = $id";
+           $statements = $bdd->query($sql);
+           while($row= $statements->fetch()){
+             echo '<option value="'.$row['id'].'">'.$row['nom'].'</option>';
+           }
+           ?>
+         </select>
+         <!--<input id="name" type="text" required class="form-control" name="nameGroupeSupp">-->
        </div>
+     </div>
 
 
      <div class="col-sm-6">
@@ -194,14 +258,19 @@ $bdd=bdd();
          <label for="name">Groupe</label>
        </br>
 
-         <select name="choixGroupe" class="col-sm-6">
+         <select name="choixGroupe" class="browser-default custom-select custom-select-lg mb-3">
            <?php
 
             $sql="SELECT * FROM groupe WHERE createur = $id";
             $statements = $bdd->query($sql);
             while($row= $statements->fetch()){
                 echo '<option value="'.$row['id'].'">'.$row['nom'].'</option>';
-
+            }
+            $sql="SELECT DISTINCT * FROM groupe WHERE admin = $id ";
+            $statements = $bdd->query($sql);
+            while($row= $statements->fetch()){
+                echo '
+                <option value="'.$row['id'].'">'.$row['nom'].'</option>';
             }
             ?>
           </select>
@@ -214,19 +283,22 @@ $bdd=bdd();
 
        <div class="row">
         <div class="form-group">
-          <input type="submit" name="action" value="Ajouter" class="btn btn-outline-danger"/>
+          <input type="submit" name="action" value="Associer" class="btn btn-outline-danger"/>
         </div>
       </div>
    </form>
  </div>
+ <script type="text/javascript" src="JsGroupe.js">
+
+ </script>
 
 
-
-<?php /*<div class="col-sm-6">
+<?php
+/*<div class="col-sm-6">
    <div class="form-group">
      <label for="name">Groupe</label>
 
      <input id="name" type="text" required class="form-control" name="nameGroupeSupp">
    </div>
  </div>
-</div>*/ ?>
+</div>*/?>

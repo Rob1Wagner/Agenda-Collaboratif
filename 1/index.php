@@ -10,21 +10,23 @@ include 'views/header.php';
 
 
 <!--Formulaire de connexion -->
+
 <section>
+
 	<form method="post" action="action/user/connexion.php" class="form">
 		<h2 class="text-danger">Connexion</h2>
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="form-group">
-					<label for="mail" >Adresse mail :</label>
-					<input type="email"class="form-control " name="mail" />
+					<label for="mail" > <img src="image/mailConnexion.png"> </label>
+						<input type="email"class="form-control " placeholder="Adresse mail" name="mail" />
 				</div>
 			</div>
 
 		<div class="col-sm-3">
 			<div class="form-group">
-				<label for="mdp" >Mot de passe :</label>
-				<input type="password" class="form-control" name="mdp" />
+				<label for="mdp" ><img src="image/key.png"></label>
+					<input type="password" class="form-control" placeholder="Mot de passe" name="mdp" />
 			</div>
 		</div>
 	</div>
@@ -46,15 +48,15 @@ include 'views/header.php';
 		<div class="row">
       <div class="col-sm-3">
         <div class="form-group">
-					<label for="prenom">Prénom :</label>
-					<input type="text" class="form-control" name="prenom" />
+					<label for="prenom"> <img src="image/nom.png"> </label>
+						<input type="text" class="form-control" placeholder="Prénom" name="prenom" />
 				</div>
 			</div>
 
 			<div class="col-sm-3">
 				<div class="form-group">
-					<label for="nom">Nom :</label>
-					<input type="text" class="form-control" name="nom" />
+					<label for="nom"> <img src="image/prenom.png"> </label>
+						<input type="text" class="form-control" placeholder="Nom" name="nom" />
 				</div>
 			</div>
 		</div>
@@ -62,23 +64,23 @@ include 'views/header.php';
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="mail">Adresse mail :</label>
-						<input type="email" class="form-control" name="mail" />
+						<label for="mail"> <img src="image/mail.png"> </label>
+							<input type="email" class="form-control" placeholder="Adresse mail" name="mail" />
 					</div>
 				</div>
 
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="mdp">Mot de passe :</label>
-						<input type="password" class="form-control" name="mdp" />
+						<label for="mdp"> <img src="image/password.png"> </label>
+							<input type="password" class="form-control" placeholder="Mot de passe" name="mdp" />
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="form-group">
-						<label for="rmdp">Répéter le mot de passe :</label>
-						<input type="password" class="form-control" name="rmdp" />
+						<label for="rmdp"> <img src="image/confirmation.png"> </label>
+							<input type="password" class="form-control" placeholder="Confirmer le mot de passe" name="rmdp" />
 					</div>
 				</div>
 			</div>
@@ -91,6 +93,7 @@ include 'views/header.php';
 				</div>
 			</div>
 	</form>
+
 </section>
 
 

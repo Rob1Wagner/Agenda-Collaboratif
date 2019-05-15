@@ -15,21 +15,42 @@
     /* récupérer les evenements entre deux dats*/
     public function getEvents ($start, $end):array{
       $id=$_SESSION['idUser'];
-
+      $memeTemps=array();
 
       $sql = "SELECT * FROM evenement  WHERE createur = $id AND (debut BETWEEN '{$start-> format('Y-m-d 00:00:00')}'
               AND '{$end-> format('Y-m-d 23:59:59')}') ORDER BY debut DESC";
-      $statements = $this->bdd->query($sql);
+      $statements = $this->bdd->query($sql)->fetchALL();
 
-      /*$id2 = $_SESSION['EG'];
-      $sql2 = "SELECT * FROM evenement WHERE id = $id2 ";
-      $statements = $statements && $this->bdd->query($sql2);*/
+      $id2 = $_SESSION['EG'];
 
+      if($id2!=null){
+        for($i=0; $i<sizeof($id2); $i++){
+          $sql2 = "SELECT * FROM evenement WHERE id = $id2[$i] ";
+          $statements2 = $this->bdd->query($sql2)->fetchALL();
+          $statements=array_merge($statements,$statements2);
+        }
+      }
+      if($_SESSION['affichage']!=null){
+        $id3[] = $_SESSION['affichage'];
 
-      $resultats = $statements->fetchALL();
+        for ($i=0; $i<sizeof($id3);$i++){
+          $sql3 = "SELECT * FROM evenement WHERE id = $id3[$i]";
+          $statements3 = $this->bdd->query($sql3)->fetchALL();
+          $statements=array_merge($statements,$statements3);
+        }
+      }
 
+      for ($i=0; $i<sizeof($statements);$i++){
+        for($j=$i+1; $j<sizeof($statements); $j++){
+          if($statements[$i]['debut']==$statements[$j]['debut']){
+            array_push($memeTemps, $statements[$i], $statements[$j]);
+          }
+        }
+      }
+      $_SESSION['memeTemps'] = $memeTemps;
 
-      return $resultats;
+      return $statements;
+
     }
 
     /* récupérer les evenements entre deux dats indexé par jour*/

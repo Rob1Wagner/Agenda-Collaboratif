@@ -4,8 +4,10 @@ require 'views/header.php';
 require 'src/date/EventValidator.php';
 require 'src/date/Event.php';
 require 'src/date/Events.php';
+
 $bdd = bdd();
 $data = [];
+
 if ($_SERVER['REQUEST_METHOD']==='POST'){
   $data =$_POST;
    $event = new App\date\Event();
@@ -41,23 +43,11 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
 
   <form action="" method="post" class="form">
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-12">
         <div class="form-group">
           <lable for="name">Titre</lable>
           <input id="name" type="text" required class="form-control" name="name" value="<?= isset($data['name']) ? h($data['name']) : '';?>">
 
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="form-group">
-          <lable for="type">Type</lable>
-        </br>
-
-          <select name="type" class="col-sm-12">
-            <option value="private">Private</option>
-            <option value="public">Public</option>
-
-           </select>
         </div>
       </div>
     </div>
@@ -128,6 +118,77 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
         <button class="btn btn-outline-danger">Ajouter l'événement</button>
       </div>
     </div>
+  </form>
+</div>
+
+
+<div class="container">
+  <h1>Associer une personne à un evenement</h1>
+
+  <form action ="action/evenement/AssocieUtilisateurEvenement.php" method="post" class="form">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="name">Evenement</label>
+        </br>
+
+        <select name="choixEvenement" class="browser-default custom-select custom-select-lg mb-3">
+          <?php
+          $id =$_SESSION['idUser'];
+          $sql="SELECT id,nom FROM evenement WHERE createur = $id";
+          $statements = $bdd->query($sql);
+          while($row= $statements->fetch()){
+            echo '<option value="'.$row['id'].'">'.$row['nom'].'</option>';
+          }
+          ?>
+        </select>
+        <!--<input id="name" type="text" required class="form-control" name="nameGroupeSupp">-->
+      </div>
+    </div>
+
+
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="name">Utilisateur</label>
+      </br>
+
+      <select name="choixUser" class="browser-default custom-select custom-select-lg mb-3">
+        <?php
+         $id= $_SESSION['idUser'];
+         $sql=" SELECT id,prenom FROM user WHERE NOT id = $id ";
+
+         $statements = $bdd->query($sql);
+         while($row= $statements->fetch()){
+             echo '<option value="'.$row['id'].'">'.$row['prenom'].'</option>';
+         }
+         ?>
+       </select>
+
+        <!--<input id="name" type="text" required class="form-control" name="nameGroupeSupp">-->
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="name">Importance</label>
+      </br>
+
+        <select name="choixImportance" class="browser-default custom-select custom-select-lg mb-3">
+          <option value="1">Important</option>
+          <option value="0">Secondaire</option>
+         </select>
+
+        <!--<input id="name" type="text" required class="form-control" name="nameGroupeSupp">-->
+      </div>
+    </div>
+  </div>
+
+
+      <div class="row">
+       <div class="form-group">
+         <input type="submit" name="action" value="Associer" class="btn btn-outline-danger"/>
+       </div>
+     </div>
   </form>
 </div>
 

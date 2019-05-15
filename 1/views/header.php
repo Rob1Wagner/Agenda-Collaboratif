@@ -20,6 +20,7 @@
 			if ($_SESSION['connecte']==1):?>
 			<a href="../../../1/agenda.php" class="navbar-brand badge badge-secondary pr-4 pl-4 mb-3 mt-3 p-2"> Agenda </a>
 			<a href="../../../1/action/groupe/ReqGroupe.php" class="navbar-brand badge badge-secondary mb-2 mt-2 p-2"> Gestion des Groupes</a>
+			<a href="../../../1/action/user/chat.php" class="navbar-brand badge badge-secondary mb-2 mt-2 p-2"> Messagerie</a>
 			<a href="../../../1/action/groupe/info.php" class="navbar-brand badge badge-secondary mb-2 mt-2 p-2"> informations Pratiques</a>
 
 		<?php endif;	?>

@@ -9,7 +9,8 @@
 
   if($_SESSION['idUser']!=$_SESSION['CU']){
     inserInvitation($_SESSION['CU'],$_SESSION['CG'],$_SESSION['CI']);
-    header('Location: /1/agenda.php');
+    $_SESSION['CUNom'] = recNomMembre($_SESSION['CU']); 
+    header('Location: ../user/chat?successAjoutMembreGroupe=1');
   }
   else{
     inserMembreGroupe($_SESSION['CU'],$_SESSION['CG'],$_SESSION['CI']);

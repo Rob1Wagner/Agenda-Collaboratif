@@ -54,6 +54,28 @@
 			</div>
 		<?php endif; ?>
 
+		<?php $memeTemps = $_SESSION['memeTemps'];
+		 if ($_SESSION['memeTemps']!=null): ?>
+	  	<div class="calendar">
+				<?php if(!isset($_GET['successEvenSupp'])): ?>
+	  			<div class= "container">
+	  				<div class="alert alert-success">
+	  					<form action="action/evenement/SuppEvenementMemeTemps.php" method="post">
+	    					<div>
+	  							<label for="accepter">vous avez deux evenements en même temps,le <?php	echo $memeTemps[0]['debut']; ?> <br> vous devez choisir un pour supprimer</label><br>
+	      					<input type="radio" name="EvenementChoisi" value="<?php	echo $memeTemps[0]['id']; ?>"> <?php	echo $memeTemps[0]['nom']; ?><br>
+	  							<input type="radio" name="EvenementChoisi" value="<?php	echo $memeTemps[1]['id']; ?>"> <?php	echo $memeTemps[1]['nom']; ?><br>
+	    					</div>
+	    					<div>
+	      					<button type="submit"class="btn btn-secondary mt-2" >Supprimer</button>
+	    					</div>
+	  					</form>
+	  				</div>
+	  			</div>
+				<?php endif; ?>
+	  	</div>
+	  <?php endif; ?>
+
 </div>
 
 
@@ -97,7 +119,7 @@
 
 								<?php foreach($eventsForDay as $event): ?>
 									<div class="event">
-										<?= (new DateTime($event['debut']))->format('H:i') ?> - 
+										<?= (new DateTime($event['debut']))->format('H:i') ?> -
 										 		<a href="/1/event.php?id=<?= $event['id'];?>"><?= h($event['nom']);?></a>
 									</div>
 								<?php endforeach; ?>

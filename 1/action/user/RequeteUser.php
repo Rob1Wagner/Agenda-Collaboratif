@@ -33,5 +33,40 @@ $bdd= bdd();
   return $statements ;
  }
 
+function InserMessage($exp, $dest, $sujet, $message){
+  $bdd= bdd();
+  $sql='INSERT INTO  `message` (`expediteur`,`destinataire` ,`sujet` ,`message`) VALUES (?,  ?,  ?,  ?);';
+  $statements= $bdd->prepare($sql);
+  $result = $statements->execute([
+                    $exp,
+                    $dest,
+                    $sujet,
+                    $message,
+                  ]);
+  return $result;
+}
+
+function recMessage($id){
+  $bdd= bdd();
+  $sql= "SELECT DISTINCT * FROM message WHERE destinataire = $id ";
+  $statements = $bdd->query($sql);
+  $resultats = $statements->fetchALL();
+  return $resultats;
+}
+
+function recNomExpi($id){
+  $bdd= bdd();
+  $sql= "SELECT DISTINCT nom FROM user WHERE id = $id ";
+  $statements = $bdd->query($sql);
+  $resultats = $statements->fetchALL();
+  return $resultats;
+}
+
+function suppMessage($id){
+  $bdd= bdd();
+  $sql ="DELETE FROM message WHERE id = $id";
+  $statements = $bdd->query($sql);
+  return $statements;
+}
 
 ?>

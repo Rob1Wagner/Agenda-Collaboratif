@@ -19,10 +19,17 @@
 			$_SESSION['mail']=$row['mail'];
 			$_SESSION['mesGroupes'];
 			$_SESSION['EG'];
-
+			$_SESSION['invitationUser']=null;
+			$_SESSION['EvenementAssocie']=null;
+			$_SESSION['affichage']=null;
 
 		}
 	}
-	header("Location: ../groupe/invitation.php");
 
+	if($_SESSION['connecte']){
+		header("Location: ../groupe/invitation.php");
+	}
+	else{
+		header("Location: ../../index.php");
+	}
 ?>
