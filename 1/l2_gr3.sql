@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 12, 2019 at 06:55 AM
+-- Generation Time: May 15, 2019 at 02:03 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -40,16 +40,20 @@ CREATE TABLE IF NOT EXISTS `evenement` (
   PRIMARY KEY (`id`),
   KEY `createur` (`createur`) USING BTREE,
   KEY `idGroupe` (`idGroupe`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `evenement`
 --
 
 INSERT INTO `evenement` (`id`, `createur`, `nom`, `description`, `debut`, `fin`, `idGroupe`) VALUES
-(1, 15, 'associe', 'grgr', '2019-04-03 16:44:00', '2019-04-04 05:55:00', NULL),
 (2, 14, 'ski', 'dzaazd', '2019-04-03 16:44:00', '2019-04-04 05:55:00', NULL),
-(3, 13, 'aza', 'zrfr', '2019-04-18 16:44:00', '2019-04-19 20:08:00', NULL);
+(3, 13, 'aza', 'zrfr', '2019-04-18 16:44:00', '2019-04-19 20:08:00', NULL),
+(12, 13, 'evenement1', 'ggerg', '2019-05-10 16:44:00', '2019-05-10 16:44:00', NULL),
+(27, 16, 'EventGroupe', '', '2019-05-17 23:00:00', '2019-05-17 12:00:00', NULL),
+(29, 16, 'EventPartage', '', '2019-05-16 14:00:00', '2019-05-16 15:00:00', NULL),
+(32, 16, 'EventPartageSec', '', '2019-05-16 16:00:00', '2019-05-16 17:00:00', NULL),
+(34, 14, 'yolo', 'zede', '2019-05-16 17:55:00', '2019-05-16 17:55:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -65,17 +69,14 @@ CREATE TABLE IF NOT EXISTS `evenementgroupe` (
   PRIMARY KEY (`id`),
   KEY `idEvenement` (`idEvenement`),
   KEY `idGroupe` (`idGroupe`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `evenementgroupe`
 --
 
 INSERT INTO `evenementgroupe` (`id`, `idEvenement`, `idGroupe`) VALUES
-(2, 1, 30),
-(3, 2, 31),
-(4, 3, 31),
-(5, 2, 30);
+(2, 2, 35);
 
 -- --------------------------------------------------------
 
@@ -88,18 +89,37 @@ CREATE TABLE IF NOT EXISTS `groupe` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
   `createur` int(11) NOT NULL,
+  `admin` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `createur` (`createur`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+  KEY `createur` (`createur`),
+  KEY `admin` (`admin`)
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `groupe`
 --
 
-INSERT INTO `groupe` (`id`, `nom`, `createur`) VALUES
-(30, 'groupeski', 14),
-(31, 'fernandoc', 13),
-(32, 'ferds', 13);
+INSERT INTO `groupe` (`id`, `nom`, `createur`, `admin`) VALUES
+(35, 'memeTemps', 14, 14),
+(37, 'aaaa', 15, 13),
+(39, 'yolo', 13, 13);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invitationevenement`
+--
+
+DROP TABLE IF EXISTS `invitationevenement`;
+CREATE TABLE IF NOT EXISTS `invitationevenement` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idUser` int(11) NOT NULL,
+  `idEvenement` int(11) NOT NULL,
+  `importance` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idUser` (`idUser`),
+  KEY `idEvenement` (`idEvenement`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -116,22 +136,33 @@ CREATE TABLE IF NOT EXISTS `invitationgroupe` (
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`),
   KEY `idGroupe` (`idGroupe`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notification`
+-- Table structure for table `message`
 --
 
-DROP TABLE IF EXISTS `notification`;
-CREATE TABLE IF NOT EXISTS `notification` (
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE IF NOT EXISTS `message` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idUserEvenement` int(11) NOT NULL,
-  `texte` text NOT NULL,
+  `expediteur` int(11) NOT NULL,
+  `destinataire` int(11) NOT NULL,
+  `sujet` text NOT NULL,
+  `message` text NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `idUserEvenement` (`idUserEvenement`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `expediteur` (`expediteur`),
+  KEY `destinataire` (`destinataire`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`id`, `expediteur`, `destinataire`, `sujet`, `message`) VALUES
+(4, 13, 14, 'lolo', 'zdazdaz'),
+(16, 16, 13, 'TEST sms', 'GENIAL');
 
 -- --------------------------------------------------------
 
@@ -147,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `mdp` varchar(50) NOT NULL,
   `mail` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
@@ -156,7 +187,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`id`, `prenom`, `nom`, `mdp`, `mail`) VALUES
 (13, 'hamze', 'hamze', 'hamze', 'hamze@hamze'),
 (14, 'robin', 'robin', 'robin', 'robin@robin'),
-(15, 'remi', 'remi', 'remi', 'remi@remi');
+(15, 'remi', 'remi', 'remi', 'remi@remi'),
+(16, 'Jonathan', 'MARIN', '1234', 'jjj@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -173,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `userevenement` (
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`),
   KEY `idEvenement` (`idEvenement`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -190,28 +222,11 @@ CREATE TABLE IF NOT EXISTS `usergroupe` (
   PRIMARY KEY (`id`),
   KEY `idGroupeId` (`idUser`),
   KEY `idGroupe` (`idGroupe`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `usergroupe`
---
-
-INSERT INTO `usergroupe` (`id`, `idUser`, `idGroupe`, `responsable`) VALUES
-(54, 13, 30, 1),
-(56, 15, 31, 1),
-(60, 15, 32, 1),
-(61, 13, 31, 1),
-(62, 14, 31, 1);
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `evenement`
---
-ALTER TABLE `evenement`
-  ADD CONSTRAINT `evenement_ibfk_1` FOREIGN KEY (`idGroupe`) REFERENCES `groupe` (`id`);
 
 --
 -- Constraints for table `evenementgroupe`
@@ -224,7 +239,15 @@ ALTER TABLE `evenementgroupe`
 -- Constraints for table `groupe`
 --
 ALTER TABLE `groupe`
-  ADD CONSTRAINT `groupe_ibfk_1` FOREIGN KEY (`createur`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `groupe_ibfk_1` FOREIGN KEY (`createur`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `groupe_ibfk_2` FOREIGN KEY (`admin`) REFERENCES `user` (`id`);
+
+--
+-- Constraints for table `invitationevenement`
+--
+ALTER TABLE `invitationevenement`
+  ADD CONSTRAINT `invitationevenement_ibfk_1` FOREIGN KEY (`idEvenement`) REFERENCES `evenement` (`id`),
+  ADD CONSTRAINT `invitationevenement_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `invitationgroupe`
@@ -234,10 +257,11 @@ ALTER TABLE `invitationgroupe`
   ADD CONSTRAINT `invitationgroupe_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `notification`
+-- Constraints for table `message`
 --
-ALTER TABLE `notification`
-  ADD CONSTRAINT `notification_ibfk_1` FOREIGN KEY (`idUserEvenement`) REFERENCES `userevenement` (`id`);
+ALTER TABLE `message`
+  ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`expediteur`) REFERENCES `user` (`id`),
+  ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`destinataire`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `userevenement`
