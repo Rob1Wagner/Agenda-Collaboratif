@@ -10,12 +10,22 @@ $data = [];
 
   $events =new App\date\Events($bdd);
   $id =$_POST['id'];
-  dd($id);
+
+  $id2=$_SESSION['idUser'];
+
+
+  $events->delete2($id,$id2);
   $events->delete($id);
 
 
+
+
+
+
+
+
   header('Location: /1/agenda?successSup=1');
-  exit();
+
 
 ?>
 

@@ -155,9 +155,9 @@ function recCreateurGroupe($id){
 
 function ReqUserEvenement($id){
   $bdd= bdd();
-  $sql= "SELECT idEvenement FROM invitationevenement WHERE idUser = $id ";
+  $sql= "SELECT idEvenement FROM userevenement WHERE idUser = $id ";
   $statements = $bdd->query($sql);
-  $resultats = $statements->fetch();
+  $resultats = $statements->fetchALL();
 
   return $resultats;
 }

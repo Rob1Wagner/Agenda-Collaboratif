@@ -4,10 +4,15 @@ session_start();
 
 function SuppEvenementEntreDeux($id){
   $bdd= bdd();
-  $sql ="DELETE FROM evenementgroupe WHERE idEvenement = '$id'";
+
+  $sql ="DELETE FROM evenement WHERE id = $id";
   $statements = $bdd->query($sql);
 
-  $sql ="DELETE FROM evenement WHERE id = '$id'";
+
+  $sql ="DELETE FROM userevenement WHERE idEvenement = $id";
+  $statements = $bdd->query($sql);
+
+  $sql ="DELETE FROM evenementgroupe WHERE idEvenement = $id";
   $statements = $bdd->query($sql);
 
 
@@ -40,7 +45,7 @@ function suppEvenementResponsable($id){
 
 function suppInvitationEvenement($id){
   $bdd= bdd();
-  $sql ="DELETE FROM invitationevenement WHERE idUser = $id";
+  $sql ="DELETE FROM invitationevenement WHERE idEvenement = $id";
   $statements = $bdd->query($sql);
 
   /*var_dump($bdd->errorInfo());

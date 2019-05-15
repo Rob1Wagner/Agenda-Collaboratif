@@ -4,12 +4,15 @@ require 'RequeteGroupe.php';
 $idEven=0;
 
 $idGroupe = recGroupe($_SESSION['idUser']);
-var_dump($idGroupe[0][0]);
+
 
 if(ReqUserEvenement($_SESSION['idUser'])){
   $evenements = ReqUserEvenement($_SESSION['idUser']);
-  $_SESSION['EvenementAssocie']=$evenements['idEvenement'];
-  var_dump($_SESSION['EvenementAssocie']);
+
+  $_SESSION['EvenementAssocie']=$evenements;
+  $_SESSION['affichage']=$_SESSION['EvenementAssocie'];
+  var_dump($_SESSION['affichage']);
+
 
 }else{
   $_SESSION['EvenementAssocie'] = null;
@@ -23,7 +26,7 @@ if(ReqInvitaionEvenement($_SESSION['idUser'])){
   var_dump($_SESSION['invitationEvenement']);
   var_dump($_SESSION['CIEvenement']);
   var_dump($_SESSION['invitationUser']);
-  
+
 
 /*  var_dump($_SESSION['invitationUser']);
   exit();*/

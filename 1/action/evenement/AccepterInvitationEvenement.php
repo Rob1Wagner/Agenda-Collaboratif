@@ -9,25 +9,25 @@
 
 
     if(inserMembreUserEvenement($_SESSION['invitationUser'],$_SESSION['invitationEvenement'],$_SESSION['CIEvenement'])){
-      suppInvitationEvenement($_SESSION['invitationUser']);
-      $_SESSION['affichage'] = $_SESSION['EvenementAssocie'];
+      suppInvitationEvenement($_SESSION['invitationEvenement']);
 
-      header('Location: ../groupe/info?okMembre=1');
+
+      header('Location: ../groupe/invitation?okMembre=1');
     }
 
   }
   else{
     if($_SESSION['CIEvenement']){
-      suppInvitationEvenement($_SESSION['invitationUser']);
+      suppInvitationEvenement($_SESSION['invitationEvenement']);
       suppEvenementResponsable($_SESSION['invitationEvenement']);
 
 
-      header('Location: ../groupe/info?noMembre=0');
+      header('Location: ../groupe/invitation?noMembre=0');
     }
     else{
       suppInvitationEvenement($_SESSION['idUser']);
 
-      header('Location: ../groupe/info?noMembre=0');
+      header('Location: ../groupe/invitation?noMembre=0');
     }
   }
    ?>

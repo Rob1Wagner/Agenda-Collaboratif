@@ -31,10 +31,13 @@
         }
       }
       if($_SESSION['affichage']!=null){
-        $id3[] = $_SESSION['affichage'];
+
+        $id3=$_SESSION['affichage'];
+
 
         for ($i=0; $i<sizeof($id3);$i++){
-          $sql3 = "SELECT * FROM evenement WHERE id = $id3[$i]";
+          $id=$id3[$i]['idEvenement'];
+          $sql3 = "SELECT * FROM evenement WHERE id = $id";
           $statements3 = $this->bdd->query($sql3)->fetchALL();
           $statements=array_merge($statements,$statements3);
         }
@@ -108,6 +111,21 @@
 
     }
 
+    public function delete2($id,$id2){
+      $sql ="DELETE FROM userevenement WHERE idEvenement = $id and idUser = $id2";
+      $statements = $this->bdd->query($sql);
+
+    }
+
+  /*  public function reqCreateur($id){
+
+      $sql = "SELECT createur FROM evenement WHERE id = $id";
+
+      $statements = $this->bdd->query($sql);
+      $resultats = $statements->fetchALL();
+
+      return $resultats;
+    }*/
     /*public function create($creator, $name, $description, $debut, $fin, $group) {
       $sql ='INSERT INTO evenement (`createur`,`nom`, `description`, `debut`, `fin`, `idGroupe`)
                           VALUES ($creator, $name, $description, $debut, $fin, $group)';
