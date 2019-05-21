@@ -5,7 +5,7 @@ namespace App\date;
 class Month{
 	public $days =['Lundi', 'Mardi', 'Mercredi','Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 	private $months =['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
-						'Aout', 'September', 'Octobre', 'Novembre', 'Décembre'];
+						'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 	public $month;
 	public $year;
 
@@ -65,7 +65,7 @@ class Month{
 		$month = $this->month + 1;
 		$year = $this->year;
 		if ($month>12){
-			$mothe = 1;
+			$month = 1;
 			$year += 1;
 		}
 		return new Month($month, $year);
@@ -76,7 +76,7 @@ class Month{
 			$month = $this->month - 1;
 			$year = $this->year;
 			if ($month < 1){
-				$mothe = 12;
+				$month = 12;
 				$year -= 1;
 			}
 			return new Month($month, $year);

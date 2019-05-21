@@ -8,7 +8,6 @@ function SuppEvenementEntreDeux($id){
   $sql ="DELETE FROM evenement WHERE id = $id";
   $statements = $bdd->query($sql);
 
-
   $sql ="DELETE FROM userevenement WHERE idEvenement = $id";
   $statements = $bdd->query($sql);
 
@@ -63,14 +62,14 @@ function inserMembreUserEvenement($user,$evenement,$importance){
                                 ]);
   return $result;
 }
-/*function ReqUserEvenement($id){
+function ReqEvent($nom){
   $bdd= bdd();
-  $sql= "SELECT idEvenement FROM userevenement WHERE idUser = $id ";
+  $sql= "SELECT id FROM evenement WHERE nom = '$nom' ";
   $statements = $bdd->query($sql);
   $resultats = $statements->fetch();
 
   return $resultats;
-}*/
+}
 
 function reqNomUser($id){
   $bdd= bdd();
@@ -80,4 +79,12 @@ function reqNomUser($id){
 
   return $resultats;
 }
+
+function update($id,$nom,$description,$debut,$fin){
+  $bdd= bdd();
+  $sql ="UPDATE evenement SET nom ='$nom',description ='$description',debut='$debut',fin='$fin' WHERE id =$id ";
+  $res = $bdd->query($sql);
+  return $res;
+}
+
 ?>

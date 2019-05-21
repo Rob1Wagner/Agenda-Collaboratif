@@ -20,7 +20,7 @@
 			$_SESSION['mesGroupes'];
 			$_SESSION['EG'];
 			$_SESSION['invitationUser']=null;
-			$_SESSION['EvenementAssocie']=null;
+			$_SESSION['invitationEvenement']=null;
 			$_SESSION['affichage']=null;
 
 		}

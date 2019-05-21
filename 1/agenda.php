@@ -41,7 +41,15 @@
 	<?php if(isset($_GET['success'])): ?>
 		<div class= "container">
 			<div class="alert alert-success">
-				L'evenement a bien été enregistré
+				L'événement a bien été enregistré
+			</div>
+		</div>
+	<?php endif; ?>
+
+	<?php if(isset($_GET['successUpdate'])): ?>
+		<div class= "container">
+			<div class="alert alert-success">
+				L'événement a bien été mis à jour
 			</div>
 		</div>
 	<?php endif; ?>
@@ -49,7 +57,15 @@
 		<?php if(isset($_GET['successSup'])): ?>
 			<div class= "container">
 				<div class="alert alert-danger">
-					L'evenement a bien été supprimé
+					L'événement a bien été supprimé
+				</div>
+			</div>
+		<?php endif; ?>
+
+		<?php if(isset($_GET['eventNotFound'])): ?>
+			<div class= "container">
+				<div class="alert alert-danger">
+					l'événement "<?php echo $_SESSION['find'] ?>" n'existe pas
 				</div>
 			</div>
 		<?php endif; ?>
@@ -59,15 +75,19 @@
 	  	<div class="calendar">
 				<?php if(!isset($_GET['successEvenSupp'])): ?>
 	  			<div class= "container">
-	  				<div class="alert alert-success">
+	  				<div class="alert alert-danger">
 	  					<form action="action/evenement/SuppEvenementMemeTemps.php" method="post">
 	    					<div>
-	  							<label for="accepter">vous avez deux evenements en même temps,le <?php	echo $memeTemps[0]['debut']; ?> <br> vous devez choisir un pour supprimer</label><br>
+	  							<label for="accepter">vous avez deux evenements en même temps,le <?php	echo $memeTemps[0]['debut']; ?> <br> soit vous choisissez un pour supprimer, ou un événement pour modifier</label><br>
+									<div class="form-check">
+								    <input type="checkbox" name="modif" class="form-check-input" id="exampleCheck1">
+								    <label class="form-check-label" for="exampleCheck1">Cochez ici pour modifier </label>
+								  </div>
 	      					<input type="radio" name="EvenementChoisi" value="<?php	echo $memeTemps[0]['id']; ?>"> <?php	echo $memeTemps[0]['nom']; ?><br>
 	  							<input type="radio" name="EvenementChoisi" value="<?php	echo $memeTemps[1]['id']; ?>"> <?php	echo $memeTemps[1]['nom']; ?><br>
 	    					</div>
 	    					<div>
-	      					<button type="submit"class="btn btn-secondary mt-2" >Supprimer</button>
+	      					<button type="submit"class="btn btn-secondary mt-2" >Supprimer/Modifier</button>
 	    					</div>
 	  					</form>
 	  				</div>

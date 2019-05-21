@@ -17,10 +17,10 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
    $event->setDescription($data['description']);
    $event->setStart(DateTime::createFromFormat ('Y-m-d H:i', $data['dd'] . ' ' . $data['start'])->format('Y-m-d H:i:s'));
    $event->setEnd(DateTime::createFromFormat   ('Y-m-d H:i', $data['df'] . ' ' . $data['end'])->format('Y-m-d H:i:s'));
-   $event->setGroup($_POST['idGroupe']);
+
 
   $events =new App\date\Events($bdd);
-
+  
   $events->create($event);
 
 
@@ -74,23 +74,6 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
 
     </div>
 
-
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="form-group">
-          <lable for="start">Début</lable>
-          <input id="start" type="time" required class="form-control" name="start" placeholder="HH:MM" value="<?= isset($data['start']) ? h($data['start']) : '';?>">
-        </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="form-group">
-          <lable for="end">Fin</lable>
-          <input id="end" type="time" required class="form-control" name="end" placeholder="HH:MM" value="<?= isset($data['end']) ? h($data['end']) : '';?>">
-        </div>
-      </div>
-    </div>
-
-
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
@@ -106,6 +89,20 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
       </div>
     </div>
 
+	 <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <lable for="start">Début</lable>
+          <input id="start" type="time" required class="form-control" name="start" placeholder="HH:MM" value="<?= isset($data['start']) ? h($data['start']) : '';?>">
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <lable for="end">Fin</lable>
+          <input id="end" type="time" required class="form-control" name="end" placeholder="HH:MM" value="<?= isset($data['end']) ? h($data['end']) : '';?>">
+        </div>
+      </div>
+    </div>
 
       <div class ="form-group">
         <lable for="description">Description</lable>
@@ -123,13 +120,13 @@ if ($_SERVER['REQUEST_METHOD']==='POST'){
 
 
 <div class="container">
-  <h1>Associer une personne à un evenement</h1>
+  <h1>Associer une personne à un événement</h1>
 
   <form action ="action/evenement/AssocieUtilisateurEvenement.php" method="post" class="form">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="name">Evenement</label>
+          <label for="name">Evénement</label>
         </br>
 
         <select name="choixEvenement" class="browser-default custom-select custom-select-lg mb-3">

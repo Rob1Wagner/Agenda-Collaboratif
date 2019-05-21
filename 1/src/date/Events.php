@@ -88,15 +88,15 @@
     }
     /* créer un evenement*/
     public function create(Event $event) {
-      $sql = $this->bdd->prepare('INSERT INTO evenement (createur, nom, description, debut, fin, idGroupe)
-                          VALUES(?, ?, ?, ?, ?, ?)');
+      $sql = $this->bdd->prepare('INSERT INTO evenement (createur, nom, description, debut, fin)
+                          VALUES(?, ?, ?, ?, ?)');
       $result = $sql->execute([
         $event->getCreator(),
         $event->getName(),
         $event->getDescription(),
         $event->getStart()->format('Y-m-d H:i:s'),
         $event->getEnd()->format('Y-m-d H:i:s'),
-        $event->getGroup(),
+
 
       ]);
       /*var_dump($sql->errorInfo());*/
@@ -117,22 +117,25 @@
 
     }
 
-  /*  public function reqCreateur($id){
+    public function update($id, $name, $description, $start, $end){
+      $sql = "UPDATE evenement SET nom=?, descrition=?, debut=? fin=? WHERE id=?";
+
+      $statements= $this->bdd->prepare($sql);
+      $statements->execute([$name, $description, $start, $end, $id]);
+
+
+    }
+
+    public function reqCreateur($id){
 
       $sql = "SELECT createur FROM evenement WHERE id = $id";
 
       $statements = $this->bdd->query($sql);
-      $resultats = $statements->fetchALL();
+      $resultats = $statements->fetch();
 
       return $resultats;
-    }*/
-    /*public function create($creator, $name, $description, $debut, $fin, $group) {
-      $sql ='INSERT INTO evenement (`createur`,`nom`, `description`, `debut`, `fin`, `idGroupe`)
-                          VALUES ($creator, $name, $description, $debut, $fin, $group)';
-
-      $statements = $this->bdd->query($sql);
-      return $statements;
-    }*/
+    }
+    
 
     public function getUser ():array{
 

@@ -38,8 +38,10 @@ $bdd=bdd();
 </div>
 
  <div class="container">
-   <h1>Créer un groupe</h1>
-
+  <button class = "btn btn-indo" type = "button" data-toggle = "collapse" data-target = "#collapseCreerGp" aria-expanded = "false" 
+  aria-controls = "collapsewithbutton"><h1>Créer un groupe</h1>
+ </button>
+<div id="collapseCreerGp" class="collapse">
    <form action="AjouGroupe.php" method="post" class="form">
      <div class="row">
        <div class="col-sm-12">
@@ -73,11 +75,13 @@ $bdd=bdd();
       </div>
    </form>
  </div>
+</div>
 
 
- <div class="container">
-   <h1>Supprimer un groupe</h1>
-
+<div class="container">
+  <button class = "btn btn-indo" type = "button" data-toggle = "collapse" data-target = "#collapseSuppG" aria-expanded = "false" aria-controls = "collapsewithbutton"><h1>Supprimer un groupe</h1>
+  </button>
+  <div id="collapseSuppG" class="collapse">
    <form action="SuppGroupe.php" method="post" class="form">
      <div class="row">
        <div class="col-sm-6 ">
@@ -113,9 +117,12 @@ $bdd=bdd();
       </div>
    </form>
  </div>
+</div>
 
  <div class="container">
-   <h1>Quitter un groupe</h1>
+  <button class = "btn btn-indo" type = "button" data-toggle = "collapse" data-target = "#collapseQuitterG" aria-expanded = "false" aria-controls = "collapsewithbutton"><h1>Quitter un groupe</h1>
+  </button>
+  <div id="collapseQuitterG" class="collapse">  
 
    <form action="SortirGroupe.php" method="post" class="form">
      <div class="row">
@@ -147,12 +154,15 @@ $bdd=bdd();
       </div>
    </form>
  </div>
-
+ </div>
 
 
  <div class="container">
-   <h1>Ajouter un membre</h1>
-
+  <button class = "btn btn-indo" type = "button" data-toggle = "collapse" 
+               data-target = "#collapseCreerAM" aria-expanded = "false" 
+               aria-controls = "collapsewithbutton"><h1>Ajouter un membre</h1>
+  </button>
+  <div id="collapseCreerAM" class="collapse">  
    <form action ="AjoutMembreGroupe.php" method="post" class="form">
      <div class="row">
        <div class="col-sm-6">
@@ -226,10 +236,12 @@ $bdd=bdd();
       </div>
    </form>
  </div>
-
+ </div>
 
  <div class="container">
-   <h1>Associer un groupe à un evenement</h1>
+  <button class = "btn btn-indo" type = "button" data-toggle = "collapse" data-target = "#collapseAssoG" aria-expanded = "false" aria-controls = "collapsewithbutton"><h1>Associer un groupe à un evenement</h1>
+  </button>
+  <div id="collapseAssoG" class="collapse"> 
 
    <form action ="AssocieGroupeEvenement.php" method="post" class="form">
      <div class="row">
@@ -288,9 +300,8 @@ $bdd=bdd();
       </div>
    </form>
  </div>
- <script type="text/javascript" src="JsGroupe.js">
-
- </script>
+ </div>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
 
 <?php

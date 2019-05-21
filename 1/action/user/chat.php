@@ -91,7 +91,12 @@ $bdd=bdd();
 </div>
 
 <div class="container">
-<h3>Supprimer un message </h3>
+<button class = "btn btn-indo" type = "button" data-toggle = "collapse" 
+data-target = "#collapseSupMessage" aria-expanded = "false" 
+aria-controls = "collapsewithbutton"><h3>Supprimer un message </h3>
+</button>
+<div id="collapseSupMessage" class="collapse">  
+
   <form action="SuppMessage.php" method="post" class="form">
     <div class="row">
       <div class="col-sm-3 ">
@@ -121,7 +126,9 @@ $bdd=bdd();
      </div>
   </form>
 </div>
+</div>
 
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 <?php /*<form action="ReqMesMessages.php" method="post">
   <button type="submit" class="btn btn-secondary mb-5 ml-2 mt-2" data-toggle="button" aria-pressed="false" autocomplete="off">voir mes messages</button>
 </form>
