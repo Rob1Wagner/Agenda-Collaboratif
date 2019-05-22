@@ -9,10 +9,10 @@ include 'views/header.php';
 
 <section>
 
-	<form method="post" action="action/user/connexion.php" class="form">
+	<form method="post" action="action/user/connexion.php" class="form justify-content-center">
 		<h2 class="text-danger">Connexion</h2>
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-3 ">
 				<div class="form-group">
 					<label for="mail" > <img src="css/image/mailConnexion.png"> </label>
 						<input type="email"class="form-control " placeholder="Adresse mail" name="mail" />

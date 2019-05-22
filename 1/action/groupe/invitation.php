@@ -1,7 +1,6 @@
 <?php
 require 'RequeteGroupe.php';
 
-
 $m=0;
 $idGroupe = recGroupe($_SESSION['idUser']);
 

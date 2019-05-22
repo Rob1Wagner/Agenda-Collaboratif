@@ -37,7 +37,7 @@
 			<a href="../../../1/action/groupe/info.php" ><img src="../../../1/css/image/info.png"class="d-inline-block align-top"></a>
 
 			
-				<a href="../../../1/action/groupe/info.php" class="navbar-brand badge badge-secondary mb-2 mt-2 p-2"> Informations Pratiques  <?php if((isset($_SESSION['invitationEvenement'])) || (isset($_SESSION['invitation'])) ): ?> <span class="badge badge-pill badge-danger">!</span><span class="badge badge-pill badge-warning"><?php endif; ?><?php if(isset($_SESSION['messagesLu'])):  ?><span class="badge badge-pill badge-warning"><?php echo ($_SESSION['messagesLu']) ?>	</span><?php endif; ?></a>
+				<a href="../../../1/action/groupe/info.php" class="navbar-brand badge badge-secondary mb-2 mt-2 p-2"> Informations Pratiques  <?php if((isset($_SESSION['invitationEvenement'])) || (isset($_SESSION['invitation'])) ): ?> <span class="badge badge-pill badge-danger">!</span><span class="badge badge-pill badge-warning"><?php endif; ?></a>
 			
 
 		<?php endif;	?>

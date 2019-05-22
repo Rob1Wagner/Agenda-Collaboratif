@@ -22,7 +22,7 @@ messagesLu($_SESSION['idUser']);
     					<div>
                 <?php if(($_SESSION['CI']) == 1 ): ?>
       							<label for="accepter">Vous avez une invitation dans le groupe "<?php	echo $_SESSION['CGNom']; ?>".<br>
-                    Vous êtes indispensable pour ce groupe, si vous refusez, le groupe sera supprimé</label><br>
+                    Vous êtes indispensable pour ce groupe,si vous refuez, vous devez contacter celui qui vous a invité</label><br>
           					<input type="radio" name="invitation" value="1"> Accepter<br>
       							<input type="radio" name="invitation" value="0"> Refuser<br>
                 <?php endif; ?>
@@ -51,7 +51,7 @@ messagesLu($_SESSION['idUser']);
     					<div>
                 <?php if(($_SESSION['CIEvenement']) == 1 ): ?>
       						  <label for="accepter">Vous avez une invitation à l'événement "<?php	echo $_SESSION['nomEvnemenemt']; ?>".<br>
-                    Vous êtes indispensable pour cet événement, si vous refusez, l'événement sera supprimé</label><br>
+                    Vous êtes indispensable pour cet événement, si vous refusez, vous devez contacter celui qui vous a invité</label><br>
           					<input type="radio" name="invitationEvenement" value="1"> Accepter<br>
       							<input type="radio" name="invitationEvenement" value="0"> Refuser<br>
                 <?php endif; ?>
@@ -170,10 +170,10 @@ messagesLu($_SESSION['idUser']);
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th class="table-dark" scope="col">Lu</th>
         <th class="table-dark" scope="col">De</th>
         <th class="table-dark" scope="col">Sujet</th>
         <th class="table-dark" scope="col">Message</th>
+        <th class="table-dark" scope="col">Lu</th>
       </tr>
     </thead>
     <?php
@@ -187,14 +187,14 @@ messagesLu($_SESSION['idUser']);
     <tbody>
       <tr >
         <th scope="row"><?php echo $i+1; ?></th>
-        <td class="table-warning"><?php if(!empty($messagLu[$i])):  ?>
-          <form action="../user/changerEtatMessage.php" method="post">
-           <input type="hidden" name="messageID" value="<?php echo $idMessage[$i]; ?>">
-           <button type="submit" class="btn btn-outline-info btn-sm m-0 waves-effect" data-toggle="button" aria-pressed="false" autocomplete="off">NON LU</button>
-          </form> <?php endif; ?></td>
         <td class="table-warning"><?php echo $nomExpi[$i][0]['nom']; ?></td>
         <td class="table-warning"><?php echo $sujet[$i]; ?></td>
         <td class="table-warning"><?php echo $messages[$i]; ?></td>
+        <td class="table-warning"><?php if(!empty($messagLu[$i])):  ?>
+          <form action="../user/changerEtatMessage.php" method="post">
+           <input type="hidden" name="messageID" value="<?php echo $idMessage[$i]; ?>">
+           <button type="submit" class="btn btn-outline-info btn-sm m-0 waves-effect" data-toggle="button" aria-pressed="false" autocomplete="off">Marquer comme lu</button>
+          </form> <?php endif; ?></td>
       </tr>
     </tbody>
       <?php endfor; ?>

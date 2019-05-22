@@ -1,5 +1,7 @@
 <?php
 require "RequeteEvenement.php" ;
+
+
 $evenement = $_POST['find'];
 $_SESSION['find'] = $_POST['find'];
 if(ReqEvent($evenement)){
